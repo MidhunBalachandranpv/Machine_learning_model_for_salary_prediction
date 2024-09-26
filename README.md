@@ -200,6 +200,7 @@ train_scores, test_scores = validation_curve(
     cv=None  
 )
 ```
+```
 print(train_scores)
 print(test_scores)
 ```
@@ -210,7 +211,46 @@ train_mean = np.mean(train_scores,axis = 1)
 test_mean = np.mean(test_scores,axis = 1)
 ```
 ```
-
+max(test_mean)
+```
+```
+sns.jointplot(x= np.log(param_range),y = test_mean)
+```
+```
+np.where(test_mean == max(test_mean))
+```
+```
+param_range[26]
+```
+```
+lm_r_best = Ridge(alpha = param_range[26])
+```
+```
+lm_r_best.fit(X_train_s,Y_train)
+```
+```
+r2_score(Y_test,lm_r_best.predict(X_test_s))
+```
+We have also created and tested Ridge regression model by importing ridge from sklearn library
+### Regression decision Tree
+```
+from sklearn import tree
+regtree = tree.DecisionTreeRegressor(max_depth = 4)
+regtree.fit(X_train,Y_train)
+y_train_pred1 = regtree.predict(X_train)
+y_test_pred1 = regtree.predict(X_test)
+y_test_pred1
+```
+```
+mean_squared_error(Y_test,y_test_pred1)
+```
+```
+r2_score(Y_train,y_train_pred1)
+```
+```
+r2_score(Y_test,y_test_pred1)
+```
+We have created and tested regression decision tree by importing tree from sklearn library
 
 
 
